@@ -1,0 +1,27 @@
+{
+    "name": "spencer-mortensen/base64",
+    "type": "library",
+    "description": "An alternative to the traditional base64 encoding, with safer characters and a different mapping.",
+    "keywords": [
+        "exceptions"
+    ],
+    "homepage": "https://github.com/spencer-mortensen/base64",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Spencer Mortensen",
+            "email": "spencer@lens.guide",
+            "homepage": "http://spencermortensen.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.0",
+        "spencer-mortensen/autoloader": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SpencerMortensen\\Base64\\": "src"
+        }
+    }
+}
