@@ -30,7 +30,7 @@ namespace SpencerMortensen\Base64;
 // aaaaaa bbbbbb cccccc dddddd
 class Base64
 {
-	public function encode($decoded)
+	public static function encode($decoded)
 	{
 		$bytes = unpack('C*', $decoded);
 
@@ -48,13 +48,13 @@ class Base64
 			$c = (($y >> 4) & 15) | (($z << 4) & 48);
 			$d = ($z >> 2) & 63;
 
-			echo $this->getSymbol($a), $this->getSymbol($b), $this->getSymbol($c), $this->getSymbol($d);
+			echo self::getSymbol($a), self::getSymbol($b), self::getSymbol($c), self::getSymbol($d);
 		}
 
 		return rtrim(ob_get_clean(), '0');
 	}
 
-	private function getSymbol($value)
+	private static function getSymbol($value)
 	{
 		if ($value < 10) {
 			return chr(48 + $value);
@@ -75,7 +75,7 @@ class Base64
 		return '-';
 	}
 
-	public function decode($encoded)
+	public static function decode($encoded)
 	{
 		$symbols = str_split($encoded, 1);
 
@@ -84,10 +84,10 @@ class Base64
 		ob_start();
 
 		for ($i = 0; $i < $n; $i += 4) {
-			$a = $this->getValue($symbols[$i]);
-			$b = $this->getValue($symbols[$i + 1]);
-			$c = $this->getValue($symbols[$i + 2]);
-			$d = $this->getValue($symbols[$i + 3]);
+			$a = self::getValue($symbols[$i]);
+			$b = self::getValue($symbols[$i + 1]);
+			$c = self::getValue($symbols[$i + 2]);
+			$d = self::getValue($symbols[$i + 3]);
 
 			$x = $a | (($b << 6) & 192);
 			$y = (($b >> 2) & 15) | (($c << 4) & 240);
@@ -99,7 +99,7 @@ class Base64
 		return rtrim(ob_get_clean(), chr(0));
 	}
 
-	private function getValue(&$symbol)
+	private static function getValue(&$symbol)
 	{
 		if ($symbol === null) {
 			return 0;
